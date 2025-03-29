@@ -11,7 +11,16 @@ const meRoute = require('./routes/me');
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(cors());
+// ✅ Allow cross-domain access (front-end address)
+app.use(cors({
+    origin: [
+      'http://localhost:3000', // For local development
+      'https://socimatic-offical-website.vercel.app' // Deployed on Vercel
+    ],
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  }));
+
 app.use(express.json());
 
 // Test database connection on startup
